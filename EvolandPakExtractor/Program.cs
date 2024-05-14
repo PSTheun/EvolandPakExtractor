@@ -3,39 +3,37 @@ using System.IO;
 
 namespace EvolandPakExtractor
 {
-	public class Program
-	{
-		public static void Main(string[] args)
-		{
-			if (args.Length < 1)
-			{
-				Console.WriteLine("Usage: EvolandPakExtractor <pakfile>");
-				Console.WriteLine("Usage: EvolandPakExtractor --pack <sourceDir> <pakfile>");
-				return;
-			}
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            foreach (var file in Directory.GetFiles("D:\\Debugging\\Projects\\Evoland Legendary Edition\\Original Paks"))
+            {
+                Unpack(Path.GetFileName(file));
+            }
 
-			if (args.Length > 2)
-			{
-				string option = args[0];
-				if (option == "-p" || option == "--pack")
-				{
-					string inputDir = args[1];
-					string outputFile = args[2];
+            Console.WriteLine("Done!");
+            Console.ReadKey();
+        }
 
-					PakFile.Pack(inputDir, outputFile);
-				}
-			} else
-			{
-				string inputFile = args[0];
-				string outputPath = Path.ChangeExtension(inputFile, null) + "_output";
+        private static void Unpack(string fileName)
+        {
+            string inputFile = fileName;
+            string outputPath = Path.ChangeExtension(Path.Combine("Extracted", inputFile), null);
+            if (Directory.Exists(outputPath))
+            {
+                Console.WriteLine($"{fileName}: Output path already exists");
+                return;
+            }
 
-				PakFile pak = PakFile.ReadPakFile(inputFile);
+            PakFile pak = PakFile.ReadPakFile(inputFile);
 
-				pak.ExtractAll(outputPath);
-			}
+            pak.ExtractAll(outputPath);
+        }
 
-			Console.WriteLine("Done!");
-			Console.ReadKey();
-		}
-	}
+        private static void Pack(string inputDirectory, string fileName)
+        {
+            PakFile.Pack(inputDirectory, fileName);
+        }
+    }
 }

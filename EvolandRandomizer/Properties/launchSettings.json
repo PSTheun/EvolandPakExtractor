@@ -1,8 +1,7 @@
 {
   "profiles": {
     "EvolandPakExtractor": {
-      "commandName": "Project",
-      "commandLineArgs": "evo1.pak",
+      "commandName": "Project",      
       "workingDirectory": "D:\\Debugging\\Projects\\Evoland Legendary Edition"
     }
   }

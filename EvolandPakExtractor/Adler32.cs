@@ -37,7 +37,7 @@
 
 using System;
 
-namespace ICSharpCode.SharpZipLib.Checksums
+namespace EvolandPakExtractor
 {
 
     /// <summary>
@@ -235,7 +235,7 @@ namespace ICSharpCode.SharpZipLib.Checksums
                 s2 %= BASE;
             }
 
-            checksum = (s2 << 16) | s1;
+            checksum = s2 << 16 | s1;
         }
 
         #region Instance Fields
